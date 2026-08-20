@@ -1,5 +1,5 @@
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { FileText, Copy, Share2, Download, X, Eye, Code2, ThumbsUp, ThumbsDown, RotateCcw } from "lucide-react";
+import { FileText, Copy, Share2, Download, X, Code2, ThumbsUp, ThumbsDown, RotateCcw } from "lucide-react";
 import { RealisticEditor } from "./RealisticEditor";
 import { useState } from "react";
 import { DiscreteTabs } from "./uselayouts/discrete-tabs";
@@ -8,14 +8,14 @@ export function ArtifactEditor({ onClose }: { onClose?: () => void }) {
   const [activeTab, setActiveTab] = useState("preview");
 
   const tabs = [
-    { id: "preview", title: "Preview", icon: Eye },
+    { id: "preview", title: "persona-deep-dive.md" },
     { id: "editor", title: "Calculator.java", icon: Code2 },
   ];
 
   return (
     <div className="flex flex-col h-full bg-[#fcfcfc] dark:bg-zinc-950 animate-in fade-in duration-300">
       <Tabs value={activeTab} className="flex flex-col h-full w-full">
-        <div className="flex items-center justify-between px-6 py-4 flex-shrink-0 bg-[#f9f9f9]/90 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-transparent dark:border-zinc-800 z-10">
+        <div className="flex items-center justify-between pr-4 flex-shrink-0 bg-[#f9f9f9]/90 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-transparent dark:border-zinc-800 z-10">
           <div className="flex-1 min-w-0">
             <DiscreteTabs 
               tabs={tabs} 
@@ -26,22 +26,22 @@ export function ArtifactEditor({ onClose }: { onClose?: () => void }) {
           
           <div className="flex items-center gap-1 text-zinc-500 dark:text-zinc-400 flex-shrink-0 ml-2">
             <button className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors" title="View Source">
-              <FileText className="w-4 h-4" />
+              <FileText className="w-4 h-4" strokeWidth={1.5} />
             </button>
             <button className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
-              <ThumbsUp className="h-4 w-4" />
+              <ThumbsUp className="h-4 w-4" strokeWidth={1.5} />
             </button>
             <button className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
-              <ThumbsDown className="h-4 w-4" />
+              <ThumbsDown className="h-4 w-4" strokeWidth={1.5} />
             </button>
             <button className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
-              <RotateCcw className="h-4 w-4" />
+              <RotateCcw className="h-4 w-4" strokeWidth={1.5} />
             </button>
             <button className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
-              <Copy className="h-4 w-4" />
+              <Copy className="h-4 w-4" strokeWidth={1.5} />
             </button>
             <button className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
-              <Download className="h-4 w-4" />
+              <Download className="h-4 w-4" strokeWidth={1.5} />
             </button>
             {onClose && (
               <button onClick={onClose} className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">

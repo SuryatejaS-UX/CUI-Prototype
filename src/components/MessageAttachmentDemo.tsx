@@ -43,7 +43,7 @@ export function MessageAttachmentDemo() {
           </Bubble>
           <Attachment>
             <AttachmentMedia>
-              <FileTextIcon />
+              <FileTextIcon strokeWidth={1.5} />
             </AttachmentMedia>
             <AttachmentContent>
               <AttachmentTitle>sales-dashboard.pdf</AttachmentTitle>
@@ -57,7 +57,7 @@ export function MessageAttachmentDemo() {
                 size="icon-sm"
                 variant="secondary"
               >
-                <DownloadIcon />
+                <DownloadIcon strokeWidth={1.5} />
               </AttachmentAction>
             </AttachmentActions>
           </Attachment>

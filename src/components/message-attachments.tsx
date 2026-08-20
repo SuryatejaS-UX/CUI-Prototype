@@ -62,7 +62,7 @@ export function MessageAttachments({
                 {item.size}
               </span>
             </span>
-            <Download className="h-4 w-4 shrink-0 text-zinc-400 opacity-0 transition-opacity group-hover:opacity-100" />
+            <Download className="h-4 w-4 shrink-0 text-zinc-500 opacity-0 transition-opacity group-hover:opacity-100" strokeWidth={1.5} />
           </motion.button>
         ) : (
           <motion.button
@@ -79,9 +79,9 @@ export function MessageAttachments({
           >
             <span className="bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl">
               {item.kind === "document" ? (
-                <FileTextIcon className="h-4 w-4" />
+                <FileTextIcon className="h-4 w-4" strokeWidth={1.5} />
               ) : (
-                <PaperclipIcon className="h-4 w-4" />
+                <PaperclipIcon className="h-4 w-4" strokeWidth={1.5} />
               )}
             </span>
             <span className="flex min-w-0 flex-1 flex-col gap-0 text-start">
@@ -93,7 +93,7 @@ export function MessageAttachments({
                 {item.pages !== undefined && ` · ${item.pages} pages`}
               </span>
             </span>
-            <Download className="h-4 w-4 shrink-0 text-zinc-400 opacity-0 transition-opacity group-hover:opacity-100" />
+            <Download className="h-4 w-4 shrink-0 text-zinc-500 opacity-0 transition-opacity group-hover:opacity-100" strokeWidth={1.5} />
           </motion.button>
         ),
       )}

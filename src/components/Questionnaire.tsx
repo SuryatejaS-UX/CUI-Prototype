@@ -214,7 +214,7 @@ export function Questionnaire({ onSubmit, onClose }: QuestionnaireProps) {
               className={cn(
                 "flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-300 ml-auto",
                 canSubmitCurrent 
-                  ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-sm hover:bg-zinc-800 dark:hover:bg-zinc-200" 
+                  ? "bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
                   : "bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500"
               )}
             >

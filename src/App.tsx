@@ -14,6 +14,8 @@ import { GreetingText } from './components/GreetingText';
 import { MarkdownResponse } from '@/components/MarkdownResponse';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { ArtifactEditor } from "@/components/ArtifactEditor";
+import { AgentCatalogue } from "@/components/AgentCatalogue";
+import { ArtifactsPage } from "@/components/ArtifactsPage";
 import { DaySeparator, type DatedMessage } from "@/components/day-separator";
 import { ErrorState } from '@/components/error-state';
 import { Suggestions } from '@/components/suggestions';
@@ -182,6 +184,7 @@ function App() {
   const [isArtifactOpen, setIsArtifactOpen] = useState(false);
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
+  const [currentView, setCurrentView] = useState<'chat' | 'catalogue' | 'artifacts'>('chat');
   const [isHITL, setIsHITL] = useState(false);
   const [isHITLResolved, setIsHITLResolved] = useState(false);
   const [hitlAnswers, setHitlAnswers] = useState<HITLAnswer[]>([]);
@@ -214,11 +217,13 @@ function App() {
   const handleNewChat = () => {
     resetChatState();
     setActiveSessionId(null);
+    setCurrentView('chat');
   };
 
   const handleSessionSelect = (id: string) => {
     resetChatState();
     setActiveSessionId(id);
+    setCurrentView('chat');
   };
 
   const historyGroups = [
@@ -602,29 +607,35 @@ function App() {
               </button>
             </div>
 
-            <div className="px-3 pb-4 space-y-1">
-              <MagneticWrapper>
-                <button 
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] transition-colors ${activeSessionId === null ? 'bg-zinc-100 dark:bg-zinc-800 font-medium text-zinc-900 dark:text-zinc-100' : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
-                  onClick={handleNewChat}
-                >
-                  <MessageSquarePlus className="h-[18px] w-[18px]" />
-                  New Chat
-                </button>
-              </MagneticWrapper>
-              <MagneticWrapper>
-                <button className="w-full flex items-center gap-3 px-3 py-2.5 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-lg text-[14px] transition-colors">
-                  <Library className="h-[18px] w-[18px]" />
-                  Agent Catalogue
-                </button>
-              </MagneticWrapper>
-              <MagneticWrapper>
-                <button className="w-full flex items-center gap-3 px-3 py-2.5 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-lg text-[14px] transition-colors">
-                  <FileStack className="h-[18px] w-[18px]" />
-                  Artifacts
-                </button>
-              </MagneticWrapper>
-            </div>
+              <div className="px-3 pb-4 space-y-1">
+                <MagneticWrapper>
+                  <button 
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] transition-colors ${currentView === 'chat' && activeSessionId === null ? 'bg-zinc-100 dark:bg-zinc-800 font-medium text-zinc-900 dark:text-zinc-100' : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
+                    onClick={handleNewChat}
+                  >
+                    <MessageSquarePlus className="h-[18px] w-[18px]" />
+                    New Chat
+                  </button>
+                </MagneticWrapper>
+                <MagneticWrapper>
+                  <button 
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] transition-colors ${currentView === 'catalogue' ? 'bg-zinc-100 dark:bg-zinc-800 font-medium text-zinc-900 dark:text-zinc-100' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100'}`}
+                    onClick={() => setCurrentView('catalogue')}
+                  >
+                    <Library className="h-[18px] w-[18px]" />
+                    Agent Catalogue
+                  </button>
+                </MagneticWrapper>
+                <MagneticWrapper>
+                  <button 
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] transition-colors ${currentView === 'artifacts' ? 'bg-zinc-100 dark:bg-zinc-800 font-medium text-zinc-900 dark:text-zinc-100' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100'}`}
+                    onClick={() => setCurrentView('artifacts')}
+                  >
+                    <FileStack className="h-[18px] w-[18px]" />
+                    Artifacts
+                  </button>
+                </MagneticWrapper>
+              </div>
 
             <div className="flex-1 overflow-y-auto px-3 pb-4">
               {historyGroups.map((group, groupIdx) => (
@@ -703,7 +714,7 @@ function App() {
                   <PanelLeftOpen className="h-5 w-5" />
                 </button>
               )}
-              <span className="text-[15px] font-medium text-zinc-900 dark:text-zinc-100">CodeMorph</span>
+              <span className="text-[15px] font-medium text-zinc-900 dark:text-zinc-100">Igris Core</span>
             </div>
 
             {!isSidebarOpen && (
@@ -718,19 +729,24 @@ function App() {
           </div>
 
           <div className="flex-1 flex flex-col relative overflow-hidden min-h-0">
-            
-            {chatState === 'idle' && !submittedQuery && !activeSessionId ? (
-              <div className="flex-1 flex flex-col items-center justify-center p-6 overflow-y-auto animate-in fade-in duration-500">
-                <div className="w-full flex flex-col items-center -mt-20">
-                  <GreetingText />
-                  <div className="w-full relative max-w-3xl mx-auto mt-4">
-                    {renderInput(false, "Ask anything")}
-                  </div>
-                </div>
-              </div>
+            {currentView === 'catalogue' ? (
+              <AgentCatalogue onSelectAgent={(id) => { console.log('Selected agent:', id); setCurrentView('chat'); }} />
+            ) : currentView === 'artifacts' ? (
+              <ArtifactsPage onOpenArtifact={(id) => { console.log('Opened artifact:', id); setIsArtifactOpen(true); }} />
             ) : (
               <>
-                <MessageScrollerProvider autoScroll defaultScrollPosition="last-anchor">
+                {chatState === 'idle' && !submittedQuery && !activeSessionId ? (
+                  <div className="flex-1 flex flex-col items-center justify-center p-6 overflow-y-auto animate-in fade-in duration-500">
+                    <div className="w-full flex flex-col items-center -mt-20">
+                      <GreetingText />
+                      <div className="w-full relative max-w-3xl mx-auto mt-4">
+                        {renderInput(false, "Ask anything")}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <MessageScrollerProvider autoScroll defaultScrollPosition="last-anchor">
                   <ChatJumpMenu activeSessionId={activeSessionId} />
                   <MessageScroller className="flex-1 flex flex-col relative overflow-hidden animate-in fade-in duration-500 min-h-0">
                     <MessageScrollerViewport className="flex-1 overflow-y-auto p-6 lg:px-12">
@@ -889,14 +905,25 @@ function App() {
                           )}
                         </>
                       )}
-                      
-                    </MessageScrollerContent>
-                  </MessageScrollerViewport>
-                  <MessageScrollerButton />
-                </MessageScroller>
-              </MessageScrollerProvider>
-
-              <div className="flex-none relative z-20">
+                        {chatState === 'completed' && <WorkflowProgress />}
+                      </MessageScrollerContent>
+                    </MessageScrollerViewport>
+                    {chatState === 'generating' && (
+                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md px-4 py-2 rounded-full border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm flex items-center gap-3">
+                          <div className="flex gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-500 animate-bounce" style={{ animationDelay: '0ms' }} />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-500 animate-bounce" style={{ animationDelay: '150ms' }} />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-500 animate-bounce" style={{ animationDelay: '300ms' }} />
+                          </div>
+                          <span className="text-[13px] font-medium text-zinc-600 dark:text-zinc-400">Synthesizing response...</span>
+                        </div>
+                      </div>
+                    )}
+                  </MessageScroller>
+                </MessageScrollerProvider>
+                
+                <div className="flex-none relative z-20">
                   {/* Fixed gradient overlay for scrolling text */}
                   <div className="absolute bottom-full left-0 right-0 h-4 bg-gradient-to-t from-[#f9f9f9]/60 dark:from-zinc-950/80 to-transparent pointer-events-none" />
                   
@@ -927,6 +954,8 @@ function App() {
                 </div>
               </>
             )}
+            </>
+          )}
           </div>
         </main>
       </ResizablePanel>

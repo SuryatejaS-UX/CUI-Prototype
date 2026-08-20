@@ -1,13 +1,12 @@
 "use client";
 
-import { SetStateAction, useState, useEffect } from "react";
-import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 
 export type TabItem = {
   id: string;
   title: string;
-  icon: any; // Lucide icon or similar
+  icon?: any; // Lucide icon or similar
 };
 
 export function DiscreteTabs({
@@ -22,114 +21,30 @@ export function DiscreteTabs({
   className?: string;
 }) {
   return (
-    <div className={cn("flex gap-3 items-center", className)}>
+    <div className={cn("flex items-end overflow-x-auto no-scrollbar", className)}>
       {tabs.map((tab) => (
-        <Button
+        <button
           key={tab.id}
-          id={tab.id}
-          title={tab.title}
-          ButtonIcon={tab.icon}
-          isActive={activeTab === tab.id}
-          setActiveButton={onTabChange}
-        />
+          onClick={() => onTabChange(tab.id)}
+          className={cn(
+            "flex items-center gap-2 px-3 py-2 text-[13px] border-r border-zinc-200 dark:border-zinc-800/80 min-w-[140px] max-w-[200px] transition-colors group cursor-pointer",
+            activeTab === tab.id
+              ? "bg-[#fdfdfd] dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 border-t border-t-blue-500 dark:border-t-blue-400"
+              : "bg-zinc-100 dark:bg-zinc-900/60 text-zinc-500 dark:text-zinc-400 border-t border-t-transparent hover:bg-zinc-200/50 dark:hover:bg-zinc-800/80"
+          )}
+        >
+          {tab.icon && <tab.icon className={cn("w-4 h-4 shrink-0", activeTab === tab.id ? "text-blue-500 dark:text-blue-400" : "text-zinc-400 dark:text-zinc-500")} />}
+          <span className="truncate flex-1 text-left font-medium">
+            {tab.title}
+          </span>
+          <div className={cn(
+            "w-4 h-4 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity",
+            activeTab === tab.id ? "opacity-100" : ""
+          )}>
+            <X className="w-3 h-3 text-zinc-500 dark:text-zinc-400" />
+          </div>
+        </button>
       ))}
     </div>
-  );
-}
-
-function Button({
-  id,
-  title,
-  ButtonIcon,
-  isActive,
-  setActiveButton,
-}: {
-  id: string;
-  title: string;
-  ButtonIcon: any;
-  isActive: boolean;
-  setActiveButton: (id: string) => void;
-}) {
-  const [showShine, setShowShine] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    if (isActive && isLoaded) {
-      setShowShine(true);
-      const timer = setTimeout(() => setShowShine(false), 800);
-      return () => clearTimeout(timer);
-    }
-  }, [isActive, isLoaded]);
-
-  const activeColor = "text-blue-600 dark:text-blue-400";
-
-  return (
-    <motion.div
-      layoutId={"button-id-" + id}
-      transition={{
-        layout: {
-          type: "spring",
-          damping: 20,
-          stiffness: 230,
-          mass: 1.2,
-          ease: [0.215, 0.61, 0.355, 1],
-        },
-      }}
-      onClick={() => {
-        setActiveButton(id);
-        setIsLoaded(true);
-      }}
-      className="w-fit h-fit flex"
-      style={{ willChange: "transform" }}
-    >
-      <motion.div
-        layout
-        transition={{
-          layout: {
-            type: "spring",
-            damping: 20,
-            stiffness: 230,
-            mass: 1.2,
-          },
-        }}
-        className={cn(
-          "flex items-center gap-1.5 bg-white dark:bg-zinc-800/80 hover:bg-zinc-50 dark:hover:bg-zinc-800 border border-transparent shadow-sm transition-colors duration-150 ease-out py-1.5 cursor-pointer relative",
-          isActive && activeColor,
-          !isActive && "text-zinc-600 dark:text-zinc-400",
-          isActive ? "px-3" : "px-2.5"
-        )}
-        style={{
-          borderRadius: "16px",
-          borderColor: isActive ? "var(--border)" : "transparent",
-        }}
-      >
-        <motion.div
-          layoutId={"icon-id-" + id}
-          className="shrink-0"
-          style={{ willChange: "transform" }}
-        >
-          <ButtonIcon size={16} className="w-4 h-4" />
-        </motion.div>
-        {isActive && (
-          <motion.div
-            className="flex items-center"
-            initial={isLoaded ? { opacity: 0, filter: "blur(4px)", width: 0 } : false}
-            animate={{ opacity: 1, filter: "blur(0px)", width: "auto" }}
-            transition={{
-              duration: isLoaded ? 0.2 : 0,
-              ease: [0.86, 0, 0.07, 1],
-            }}
-          >
-            <motion.span
-              layoutId={"text-id-" + id}
-              className="text-[13px] font-medium whitespace-nowrap relative inline-block pl-0.5 pr-1"
-              style={{ willChange: "transform" }}
-            >
-              {title}
-            </motion.span>
-          </motion.div>
-        )}
-      </motion.div>
-    </motion.div>
   );
 }

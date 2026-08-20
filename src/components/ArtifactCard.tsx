@@ -68,7 +68,7 @@ export function ArtifactCard({
           </p>
         )}
       </div>
-      <Download className="text-zinc-500 h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
+      <Download className="text-zinc-500 h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" strokeWidth={1.5} />
     </motion.div>
   );
 }
