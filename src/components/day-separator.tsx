@@ -14,12 +14,14 @@ export interface DatedMessage {
 
 export function DaySeparator({
   messages,
+  initialLastDay = "",
   className,
   ...props
 }: Omit<ComponentProps<"div">, "children" | "messages"> & {
   messages: readonly DatedMessage[];
+  initialLastDay?: string;
 }) {
-  let lastDay = "";
+  let lastDay = initialLastDay;
 
   return (
     <div
@@ -53,7 +55,7 @@ export function DaySeparator({
                 className={cn(
                   "max-w-[80%] leading-relaxed break-words",
                   message.role === "user"
-                    ? "bg-gray-100 text-gray-900 rounded-3xl rounded-tr-sm px-5 py-4 shadow-sm text-[15px]"
+                    ? "bg-zinc-100 text-zinc-900 rounded-3xl rounded-tr-sm px-5 py-4 shadow-sm text-[15px]"
                     : "text-foreground/75 text-[15px]",
                 )}
               >

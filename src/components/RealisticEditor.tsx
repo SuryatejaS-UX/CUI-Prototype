@@ -15,7 +15,7 @@ export function RealisticEditor({ initialCode, className }: RealisticEditorProps
   // Extremely basic syntax highlighting for Java (Light Theme)
   const highlightLine = (line: string) => {
     if (line.trim().startsWith('//')) {
-      return <span className="text-[#008000]">{line}</span>;
+      return <span className="text-green-700 dark:text-green-500">{line}</span>;
     }
 
     // Replace < and > first
@@ -33,17 +33,17 @@ export function RealisticEditor({ initialCode, className }: RealisticEditorProps
     
     // Replace placeholders with spans
     let highlighted = escaped
-      .replace(/@@KW@@(.*?)@@END@@/g, '<span style="color:#0000ff">$1</span>')
-      .replace(/@@CL@@(.*?)@@END@@/g, '<span style="color:#267f99">$1</span>')
-      .replace(/@@ST@@(.*?)@@END@@/g, '<span style="color:#a31515">$1</span>');
+      .replace(/@@KW@@(.*?)@@END@@/g, '<span class="text-blue-600 dark:text-blue-400">$1</span>')
+      .replace(/@@CL@@(.*?)@@END@@/g, '<span class="text-teal-600 dark:text-teal-400">$1</span>')
+      .replace(/@@ST@@(.*?)@@END@@/g, '<span class="text-red-700 dark:text-orange-400">$1</span>');
 
     return <span dangerouslySetInnerHTML={{ __html: highlighted || ' ' }} />;
   };
 
   return (
-    <div className={cn("flex flex-col w-full h-full bg-white font-mono text-[14px]", className)}>
+    <div className={cn("flex flex-col w-full h-full bg-white dark:bg-[#1e1e1e] font-mono text-[14px]", className)}>
       <div className="flex-1 flex overflow-auto">
-        <div className="flex flex-col text-right py-4 px-4 bg-gray-50 text-gray-400 select-none border-r border-gray-200 min-w-[50px]">
+        <div className="flex flex-col text-right py-4 px-4 bg-zinc-50 dark:bg-[#1e1e1e] text-zinc-400 dark:text-zinc-500 select-none border-r border-zinc-200 dark:border-zinc-800 min-w-[50px]">
           {lines.map((_, i) => (
             <div key={i} className="leading-relaxed">{i + 1}</div>
           ))}
@@ -52,7 +52,7 @@ export function RealisticEditor({ initialCode, className }: RealisticEditorProps
           {/* Syntax Display */}
           <div 
             id="syntax-display"
-            className="absolute inset-0 w-full h-full p-4 pointer-events-none whitespace-pre font-mono text-[14px] leading-relaxed overflow-hidden text-gray-900"
+            className="absolute inset-0 w-full h-full p-4 pointer-events-none whitespace-pre font-mono text-[14px] leading-relaxed overflow-hidden text-zinc-900 dark:text-zinc-300"
             style={{ tabSize: 4 }}
           >
             {lines.map((line, i) => (
@@ -73,7 +73,7 @@ export function RealisticEditor({ initialCode, className }: RealisticEditorProps
               }
             }}
             spellCheck={false}
-            className="absolute inset-0 w-full h-full p-4 bg-transparent text-transparent caret-black outline-none resize-none font-mono text-[14px] leading-relaxed whitespace-pre"
+            className="absolute inset-0 w-full h-full p-4 bg-transparent text-transparent caret-black dark:caret-white outline-none resize-none font-mono text-[14px] leading-relaxed whitespace-pre"
             style={{ tabSize: 4 }}
           />
         </div>

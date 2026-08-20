@@ -67,7 +67,7 @@ function SelectableText({ text, className }: { text: string; className?: string 
   );
 }
 
-export function MarkdownResponse({ onOpenArtifact }: { onOpenArtifact?: () => void }) {
+export function MarkdownResponse({ content, onOpenArtifact }: { content?: string, onOpenArtifact?: () => void }) {
   const [copied, setCopied] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -97,61 +97,69 @@ export function MarkdownResponse({ onOpenArtifact }: { onOpenArtifact?: () => vo
   };
 
   return (
-    <div className="w-full animate-in fade-in slide-in-from-bottom-2 duration-500 mt-8 mb-12 relative group">
+    <div className="w-full animate-in fade-in slide-in-from-bottom-2 duration-500 mt-0 mb-12 relative group">
       {/* Rendered Markdown Body */}
-      <div className="w-full flex flex-col gap-5 text-[15px] leading-relaxed text-gray-800">
+      <div className="w-full flex flex-col gap-5 text-[15px] leading-relaxed text-zinc-800 dark:text-zinc-200">
         
-        <div>
-          <h2 className="text-xl font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-4">
-            Analysis Complete: Quarterly Reimbursements
-          </h2>
-          <p className="mb-4">
-            I've reviewed all employee reimbursements over <strong>₹20,000</strong> from Q2 and checked them against the updated compliance policies. Based on your inputs regarding acceptable variances and regional thresholds, here is the summary of the flagged items.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-medium text-gray-900 mb-3">Key Findings</h3>
-          <ul className="list-disc pl-5 space-y-2 mb-4">
-            <li>Identified <span className="text-red-600 font-semibold">4</span> out-of-policy claims primarily related to late submissions.</li>
-            <li>Travel expenses in the APAC region accounted for <strong>68%</strong> of high-value reimbursements.</li>
-            <li>No duplicate submissions detected in this quarter.</li>
-          </ul>
-          <div className="mt-4">
-            <ArtifactCard 
-              title="persona-deep-dive.md"
-              meta="1.2 KB"
-              onClick={onOpenArtifact}
-            />
+        {content ? (
+          <div className="whitespace-pre-wrap">
+            <SelectableText text={content} />
           </div>
-        </div>
+        ) : (
+          <>
+            <div>
+              <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 border-b border-zinc-200 dark:border-zinc-800 pb-2 mb-4">
+                Analysis Complete: Quarterly Reimbursements
+              </h2>
+              <p className="mb-4">
+                I've reviewed all employee reimbursements over <strong>₹20,000</strong> from Q2 and checked them against the updated compliance policies. Based on your inputs regarding acceptable variances and regional thresholds, here is the summary of the flagged items.
+              </p>
+            </div>
 
-        <div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Next Steps</h3>
-          <SelectableText 
-            text="You can use the exported JSON to trigger an automated email sequence to the respective employees asking for clarification, or I can generate a compliance report PDF for the finance team."
-          />
-        </div>
+            <div>
+              <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-3">Key Findings</h3>
+              <ul className="list-disc pl-5 space-y-2 mb-4">
+                <li>Identified <span className="text-red-600 dark:text-red-400 font-semibold">4</span> out-of-policy claims primarily related to late submissions.</li>
+                <li>Travel expenses in the APAC region accounted for <strong>68%</strong> of high-value reimbursements.</li>
+                <li>No duplicate submissions detected in this quarter.</li>
+              </ul>
+              <div className="mt-4">
+                <ArtifactCard 
+                  title="persona-deep-dive.md"
+                  meta="1.2 KB"
+                  onClick={onOpenArtifact}
+                />
+              </div>
+            </div>
 
-        <div className="mt-2">
-          <MessageAttachments attachments={mockAttachments} onOpen={handleOpenAttachment} className="max-w-md" />
-        </div>
+            <div>
+              <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2">Next Steps</h3>
+              <SelectableText 
+                text="You can use the exported JSON to trigger an automated email sequence to the respective employees asking for clarification, or I can generate a compliance report PDF for the finance team."
+              />
+            </div>
+
+            <div className="mt-2">
+              <MessageAttachments attachments={mockAttachments} onOpen={handleOpenAttachment} className="max-w-md" />
+            </div>
+          </>
+        )}
 
       </div>
 
-      <div className="mt-8 border-t border-gray-100 pt-4 flex items-center justify-between w-full">
+      <div className="mt-8 border-t border-zinc-200 dark:border-zinc-800 pt-4 flex items-center justify-between w-full">
         {/* Message Actions on Hover */}
-        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center gap-1 bg-white border border-gray-100 shadow-sm rounded-lg p-1">
-          <button className="p-1.5 text-gray-400 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" title="Copy Message">
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center gap-1">
+          <button className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors" title="Copy Message">
             <Copy className="w-4 h-4" />
           </button>
-          <button className="p-1.5 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors" title="Good Response">
+          <button className="p-1.5 text-zinc-400 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors" title="Good Response">
             <ThumbsUp className="w-4 h-4" />
           </button>
-          <button className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Bad Response">
+          <button className="p-1.5 text-zinc-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" title="Bad Response">
             <ThumbsDown className="w-4 h-4" />
           </button>
-          <button className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Regenerate">
+          <button className="p-1.5 text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" title="Regenerate">
             <RotateCw className="w-4 h-4" />
           </button>
         </div>
@@ -164,7 +172,7 @@ export function MarkdownResponse({ onOpenArtifact }: { onOpenArtifact?: () => vo
             { label: "tokens", value: "1,204" },
             { label: "cost", value: "$0.018" }
           ]} 
-          className="flex-1 justify-end"
+          className="flex-1 justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-200"
         />
       </div>
 
