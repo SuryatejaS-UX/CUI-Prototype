@@ -141,12 +141,8 @@ export function ArtifactsPage({ onOpenArtifact }: { onOpenArtifact: (id: string)
                   </div>
                 </div>
               </div>
-              
-              <p className="text-[12px] text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2 flex-1 mb-2.5">
-                {artifact.description}
-              </p>
 
-              <div className="flex items-center justify-between pt-2.5 border-t border-zinc-100 dark:border-zinc-800/80">
+              <div className="flex items-center justify-between pt-2.5 mt-2 border-t border-zinc-100 dark:border-zinc-800/80">
                 <div className="flex items-center gap-1 text-zinc-400 dark:text-zinc-500">
                   <Clock className="w-3 h-3" />
                   <span className="text-[10px]">{artifact.date}</span>

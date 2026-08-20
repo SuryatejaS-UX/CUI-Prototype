@@ -732,7 +732,11 @@ function App() {
             {currentView === 'catalogue' ? (
               <AgentCatalogue onSelectAgent={(id) => { console.log('Selected agent:', id); setCurrentView('chat'); }} />
             ) : currentView === 'artifacts' ? (
-              <ArtifactsPage onOpenArtifact={(id) => { console.log('Opened artifact:', id); setIsArtifactOpen(true); }} />
+              <ArtifactsPage onOpenArtifact={(id) => { 
+                console.log('Opened artifact:', id); 
+                setCurrentView('chat');
+                setIsArtifactOpen(true); 
+              }} />
             ) : (
               <>
                 {chatState === 'idle' && !submittedQuery && !activeSessionId ? (
