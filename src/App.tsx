@@ -735,6 +735,7 @@ function App() {
               <ArtifactsPage onOpenArtifact={(id) => { 
                 console.log('Opened artifact:', id); 
                 setCurrentView('chat');
+                setActiveSessionId('mock');
                 setIsArtifactOpen(true); 
               }} />
             ) : (
