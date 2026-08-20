@@ -86,7 +86,7 @@ const mockTurns = [
     title: "ive created a design system using antigravity.",
     messages: [
       { id: "13", day: "Today", time: "4:00 PM", role: "user", text: "ive created a design system using antigravity." },
-      { id: "14", day: "Today", time: "4:01 PM", role: "assistant", text: "That sounds great! Antigravity design systems provide an excellent foundation." }
+      { id: "14", day: "Today", time: "4:01 PM", role: "assistant", text: "That sounds great! Antigravity design systems provide an excellent foundation. I have generated a deep dive document into the persona for your reference.", hasArtifact: true }
     ]
   }
 ];
@@ -783,6 +783,7 @@ function App() {
                                       ) : (
                                         <MarkdownResponse 
                                           content={message.text} 
+                                          hasArtifact={(message as any).hasArtifact}
                                           onOpenArtifact={() => setIsArtifactOpen(true)} 
                                         />
                                       )}

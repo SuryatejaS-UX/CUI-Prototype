@@ -67,7 +67,7 @@ function SelectableText({ text, className }: { text: string; className?: string 
   );
 }
 
-export function MarkdownResponse({ content, onOpenArtifact }: { content?: string, onOpenArtifact?: () => void }) {
+export function MarkdownResponse({ content, onOpenArtifact, hasArtifact }: { content?: string, onOpenArtifact?: () => void, hasArtifact?: boolean }) {
   const [copied, setCopied] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -104,6 +104,15 @@ export function MarkdownResponse({ content, onOpenArtifact }: { content?: string
         {content ? (
           <div className="whitespace-pre-wrap">
             <SelectableText text={content} />
+            {hasArtifact && (
+              <div className="mt-4">
+                <ArtifactCard 
+                  title="persona-deep-dive.md"
+                  meta="1.2 KB"
+                  onClick={onOpenArtifact}
+                />
+              </div>
+            )}
           </div>
         ) : (
           <>
