@@ -593,7 +593,7 @@ function App() {
             <ResizablePanel defaultSize={18} minSize={15} maxSize={30} className="bg-[#fdfdfd] dark:bg-zinc-950/80 dark:backdrop-blur-xl border-r border-transparent dark:border-zinc-800 flex flex-col h-full z-10 transition-all duration-300">
               <aside className="flex flex-col h-full">
             <div className="h-12 flex items-center justify-between px-4 border-b border-zinc-100 dark:border-zinc-800 mb-2">
-              <span className="text-[15px] font-medium text-zinc-900 dark:text-zinc-100">MCCI Copilot</span>
+              <span className="text-[15px] font-medium text-zinc-900 dark:text-zinc-100">igris</span>
               <button 
                 onClick={() => setIsSidebarOpen(false)}
                 className="p-1.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
