@@ -9,7 +9,7 @@ export function ArtifactEditor({ onClose }: { onClose?: () => void }) {
 
   const tabs = [
     { id: "preview", title: "persona-deep-dive.md" },
-    { id: "editor", title: "Calculator.java", icon: Code2 },
+    { id: "editor", title: "retention_metrics.json", icon: Code2 },
   ];
 
   return (
@@ -78,51 +78,36 @@ export function ArtifactEditor({ onClose }: { onClose?: () => void }) {
           
           <TabsContent value="editor" className="h-full w-full p-0 m-0 overflow-auto bg-[#fcfcfc] dark:bg-zinc-950">
             <RealisticEditor 
-              initialCode={`import java.util.Scanner;
-
-public class Calculator {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        double num1, num2, result = 0;
-        char operator;
-
-        // Taking User Input
-        System.out.print("Enter First Number: ");
-        num1 = scanner.nextDouble();
-        
-        System.out.print("Enter Operator (+, -, *, /): ");
-        operator = scanner.next().charAt(0);
-        
-        System.out.print("Enter Second Number: ");
-        num2 = scanner.nextDouble();
-        
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                if(num2 != 0) {
-                    result = num1 / num2;
-                } else {
-                    System.out.println("Error: Division by zero");
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Error: Invalid operator");
-                return;
-        }
-        
-        System.out.println("Result: " + result);
-        scanner.close();
+              initialCode={`{
+  "segment": "Casual Gamers",
+  "region": "North America",
+  "age_group": "25-40",
+  "metrics": {
+    "d1_retention": 45.2,
+    "d7_retention": 18.5,
+    "d30_retention": 5.1,
+    "avg_session_length_minutes": 12.4,
+    "sessions_per_week": 4.2
+  },
+  "churn_factors": [
+    {
+      "factor": "Onboarding Friction",
+      "impact_score": 8.5,
+      "description": "Users drop off when asked to create an account before playing."
+    },
+    {
+      "factor": "Tutorial Length",
+      "impact_score": 7.2,
+      "description": "Tutorial exceeds 3 minutes, leading to abandonment."
     }
-}`} 
+  ],
+  "recommended_actions": [
+    "Implement guest mode for immediate gameplay",
+    "Condense tutorial into contextual tooltips",
+    "Add social login options (Google/Apple) post-level 1"
+  ]
+}`}
+              language="json"
             />
           </TabsContent>
         </div>

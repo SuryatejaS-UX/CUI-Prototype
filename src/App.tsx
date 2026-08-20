@@ -35,58 +35,34 @@ import { UserMessageBlock } from "@/components/UserMessageBlock";
 const mockTurns = [
   { 
     id: 'msg-1', 
-    title: "Detail using ChatGPT - I'm working on develo...",
+    title: "Help me analyze casual mobile gamers",
     messages: [
-      { id: "1", day: "Yesterday", time: "2:30 PM", role: "user", text: "Detail using ChatGPT - I'm working on developing a new UI..." },
-      { id: "2", day: "Yesterday", time: "2:31 PM", role: "assistant", text: "I can help with that. What kind of UI are you developing?" }
+      { id: "1", day: "Yesterday", time: "2:30 PM", role: "user", text: "I'm working on a new retention strategy for our mobile game. Can you help me analyze the 'Casual Gamer' segment?" },
+      { id: "2", day: "Yesterday", time: "2:31 PM", role: "assistant", text: "Absolutely. To build a solid retention strategy, we first need to understand their core motivations and pain points. Are you focusing on a specific demographic or region?" }
     ]
   },
   { 
     id: 'msg-2', 
-    title: "Start with Step 1: how to research and audit ...",
+    title: "Focusing on North America, ages 25-40.",
     messages: [
-      { id: "3", day: "Today", time: "10:00 AM", role: "user", text: "Start with Step 1: how to research and audit competitors." },
-      { id: "4", day: "Today", time: "10:01 AM", role: "assistant", text: "Here is a guide on researching and auditing competitors..." }
+      { id: "3", day: "Today", time: "10:00 AM", role: "user", text: "Focusing on North America, ages 25-40." },
+      { id: "4", day: "Today", time: "10:01 AM", role: "assistant", text: "Got it. This demographic typically values quick gameplay sessions, clear progression systems, and social integration. Would you like me to map out their primary user journey?" }
     ]
   },
   { 
     id: 'msg-3', 
-    title: "Step 2 dive deep",
+    title: "Yes, specifically focusing on friction during onboarding.",
     messages: [
-      { id: "5", day: "Today", time: "11:00 AM", role: "user", text: "Step 2 dive deep" },
-      { id: "6", day: "Today", time: "11:02 AM", role: "assistant", text: "Diving deep into Step 2, we need to analyze..." }
+      { id: "5", day: "Today", time: "11:00 AM", role: "user", text: "Yes, specifically focusing on friction during onboarding." },
+      { id: "6", day: "Today", time: "11:02 AM", role: "assistant", text: "Onboarding friction for casual gamers usually stems from complex tutorials or mandatory account creation before gameplay. I can compile a deep dive into these friction points and recommend solutions." }
     ]
   },
   { 
     id: 'msg-4', 
-    title: "Is this covered everything... don't explain just...",
+    title: "That sounds perfect. Generate a deep dive document for me.",
     messages: [
-      { id: "7", day: "Today", time: "1:00 PM", role: "user", text: "Is this covered everything... don't explain just list them." },
-      { id: "8", day: "Today", time: "1:01 PM", role: "assistant", text: "- Item A\n- Item B\n- Item C" }
-    ]
-  },
-  { 
-    id: 'msg-5', 
-    title: "How do I map these with components",
-    messages: [
-      { id: "9", day: "Today", time: "2:00 PM", role: "user", text: "How do I map these with components" },
-      { id: "10", day: "Today", time: "2:02 PM", role: "assistant", text: "You can map them using the `map` function in React..." }
-    ]
-  },
-  { 
-    id: 'msg-6', 
-    title: "COLOUR",
-    messages: [
-      { id: "11", day: "Today", time: "3:00 PM", role: "user", text: "COLOUR" },
-      { id: "12", day: "Today", time: "3:01 PM", role: "assistant", text: "Colors can be configured in your CSS variables or Tailwind config." }
-    ]
-  },
-  { 
-    id: 'msg-7', 
-    title: "ive created a design system using antigravity.",
-    messages: [
-      { id: "13", day: "Today", time: "4:00 PM", role: "user", text: "ive created a design system using antigravity." },
-      { id: "14", day: "Today", time: "4:01 PM", role: "assistant", text: "That sounds great! Antigravity design systems provide an excellent foundation. I have generated a deep dive document into the persona for your reference.", hasArtifact: true }
+      { id: "7", day: "Today", time: "1:00 PM", role: "user", text: "That sounds perfect. Generate a deep dive document for me." },
+      { id: "8", day: "Today", time: "1:01 PM", role: "assistant", text: "I've synthesized the research and generated a comprehensive persona deep dive for the Casual Gamer segment in North America, highlighting key motivations and friction resolution strategies.", hasArtifact: true }
     ]
   }
 ];
