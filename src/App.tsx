@@ -536,14 +536,6 @@ function App() {
               Gen AI Platform
             </span>
           </div>
-          <div className="w-px h-4 bg-slate-200 dark:bg-zinc-800 mx-2" />
-          <div className="flex items-center gap-1.5 text-[13px] text-zinc-500 dark:text-zinc-400">
-            <span className="hover:text-zinc-900 dark:hover:text-zinc-100 cursor-pointer transition-colors">Home</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="hover:text-zinc-900 dark:hover:text-zinc-100 cursor-pointer transition-colors">Gen AI Designer</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="font-medium text-zinc-900 dark:text-zinc-100">Purposive AI Agents</span>
-          </div>
         </div>
 
         <div className="flex items-center gap-1 text-zinc-500 dark:text-zinc-400">
