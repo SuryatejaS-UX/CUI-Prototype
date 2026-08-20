@@ -213,7 +213,7 @@ function App() {
     {
       label: "Yesterday",
       items: [
-        { id: 'mock', title: "Detail using ChatGPT - I'm working on developing a new UI...", time: "2:30 pm" },
+        { id: 'mock', title: "Help me analyze casual mobile gamers", time: "2:30 pm" },
         { id: '3', title: "Compare Q1 and Q2 revenue for the North American market", time: "02:35 pm" },
         { id: '4', title: "Auto Loan Dropout Analysis Metrics", time: "11:37 am" },
       ]
